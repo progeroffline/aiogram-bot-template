@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from data.config import BOT_TOKEN
-from aiogram import types
-from aiogram import Dispatcher, Bot
+import os
+
+from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from logzero import logger, logfile
+from logzero import logfile, logger
 
+from data.config import BOT_TOKEN
 
-logfile("logs/bot_log.log", maxBytes=10_000_000, backupCount=20)
+if not os.path.exists('logs/'):
+    os.system('mkdir logs')
+logfile('logs/bot.log')
 
 bot = Bot(token=BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 storage = MemoryStorage()
